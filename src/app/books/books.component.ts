@@ -8,12 +8,14 @@ import { BookRepository } from "../models/book.repository";
   styleUrls: ["./books.component.css"],
 })
 export class BooksComponent implements OnInit {
+  pageTitle:string
   books: Book[];
   bookRepository: BookRepository;
 
   constructor() {
     this.bookRepository=new BookRepository()
     this.books = this.bookRepository.getBooks();
+    this.pageTitle="All Books"
   }
 
   ngOnInit() {}

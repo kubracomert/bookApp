@@ -1,14 +1,33 @@
 <div class="container">
-  <!-- <app-book *ngFor="let item of books"></app-book> -->
-
-  <div class="card mb-3"  *ngFor="let item of books">
-    <img class="card-img-top" height="300px" width="0px" src="{{ item.url }}" alt="Card image cap" />
-    <div class="card-body">
-      <h5 class="card-title">{{ item.name }}</h5>
-      <p class="card-text">
-        {{ item.detail }}
-      </p>
-      <a href="#" class="btn btn-primary">Detay</a>
-    </div>
+  <div *ngIf="books.length > 0; else noBook">
+    <h1>{{ pageTitle }}</h1>
+    <ng-template
+      [ngTemplateOutlet]="bookList"
+      [ngTemplateOutletContext]="{listBooks:books}"
+    ></ng-template>
+    <div class="alert alert-primary">{{ books.length }} Books Found !</div>
   </div>
 </div>
+
+<ng-template #noBook>
+  <div class="alert alert-warning">No Book!</div>
+</ng-template>
+
+<ng-template #bookList let-booksParams="listBooks">
+  <div class="card mb-3" *ngFor="let item of booksParams">
+    <div class="row">
+      <div class="col-3">
+        <img class="card-img-top" src="{{ item.url }}" alt="Card image cap" />
+      </div>
+      <div class="col-9">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">
+            {{ item.detail }}
+          </p>
+          <a href="#" class="btn btn-primary">Detay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
