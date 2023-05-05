@@ -5,12 +5,12 @@
       [ngTemplateOutlet]="bookList"
       [ngTemplateOutletContext]="{listBooks:books}"
     ></ng-template>
-    <div class="alert alert-primary">{{ books.length }} Books Found !</div>
+    <div class="alert alert-primary">{{ books.length }} adet kitap bulundu.</div>
   </div>
 </div>
 
 <ng-template #noBook>
-  <div class="alert alert-warning">No Book!</div>
+  <div class="alert alert-warning">Aranılan özellikte kitap bulunmadı!</div>
 </ng-template>
 
 <ng-template #bookList let-booksParams="listBooks">
