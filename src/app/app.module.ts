@@ -10,6 +10,7 @@ import { CategoryComponent } from "./category/category.component";
 import { BasketComponent } from "./basket/basket.component";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
+import { BookCreateComponent } from './books/book-create/book-create.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     BookDetailComponent,
     CategoryComponent,
     BasketComponent,
+    BookCreateComponent,
   ],
   imports: [
     //modules

@@ -1,8 +1,12 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
 import { Book } from "src/app/models/book";
 import { Observable, throwError } from "rxjs";
-import { catchError,tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 
 @Injectable()
 export class BookService {
@@ -16,7 +20,7 @@ export class BookService {
       tempUrl += "?category_id=" + category_id;
     }
     return this.http.get<Book[]>(tempUrl).pipe(
-      tap(data=>console.log(data)),
+      tap((data) => console.log(data)),
       catchError(this.handleError)
     );
   }
@@ -30,6 +34,19 @@ export class BookService {
       tap((data) => console.log(data)),
       catchError(this.handleError)
     );
+  }
+
+  createBook(book: Book): Observable<Book> {
+    let headerOptions = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Token",
+    });
+    return this.http
+      .post<Book>(this.url, book, { headers: headerOptions })
+      .pipe(
+        tap((data) => console.log({ data }, "fajgkjf")),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
