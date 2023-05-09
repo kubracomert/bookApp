@@ -12,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 export class BooksComponent implements OnInit {
   pageTitle: string;
   books: Book[] = [];
+  error:any
 
   constructor(
     private bookService: BookService,
@@ -22,9 +23,15 @@ export class BooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      this.bookService.getBooks(params["category_id"]).subscribe((data) => {
-        this.books = data;
-      });
+      this.bookService.getBooks(params["category_id"]).subscribe(
+        (data) => {
+          this.books = data;
+        },
+        (error) => {
+          console.log({error})
+          this.error=error
+        }
+      );
     });
   }
 }
