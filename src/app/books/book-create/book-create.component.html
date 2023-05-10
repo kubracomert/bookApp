@@ -1,21 +1,75 @@
 <h1>Kitap Ekle</h1>
 
+<form #form="ngForm" (ngSubmit)="createBook()">
   <div class="mb-3">
     <label for="name" class="form-label">İsim</label>
-    <input #name type="text" class="form-control" />
+    <input
+      required
+      minlength="2"
+      maxlength="20"
+      type="text"
+      [(ngModel)]="model.name"
+      name="name"
+      class="form-control"
+      #name="ngModel"
+      (change)="handleChange(name)"
+    />
+    <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+      <p *ngIf="name.errors.required">Bu alan gerekli.</p>
+      <p *ngIf="name.errors.minlength">En az 2 karakter giriniz.</p>
+    </div>
   </div>
   <div class="mb-3">
     <label for="url" class="form-label">Url</label>
-    <input #url type="text" class="form-control" />
+    <input
+      required
+      minlength="5"
+      type="text"
+      [(ngModel)]="model.url"
+      name="url"
+      class="form-control"
+      #url="ngModel"
+    />
+    <div class="alert alert-danger" *ngIf="url.invalid && url.touched">
+      <p *ngIf="url.errors.required">Bu alan gerekli.</p>
+      <p *ngIf="url.errors.minlength">En az 5 karakter giriniz.</p>
+    </div>
   </div>
   <div class="mb-3">
     <label for="detail" class="form-label">Detay</label>
-    <textarea #detail class="form-control" cols="30" rows="5"></textarea>
+    <textarea
+      required
+      minlength="10"
+      maxlength="100"
+      class="form-control"
+      cols="30"
+      [(ngModel)]="model.detail"
+      name="detail"
+      rows="5"
+      #detail="ngModel"
+    ></textarea>
+    <div class="alert alert-danger" *ngIf="detail.invalid && detail.touched">
+      <p *ngIf="detail.errors.required">Bu alan gerekli.</p>
+      <p *ngIf="detail.errors.minlength">En az 10 karakter giriniz.</p>
+    </div>
   </div>
   <div class="mb-3">
-    <label for="category_id">Kategori</label>
-    <select #category_id class="form-select" >
-        <option *ngFor="let item of categories" value="{{item.id}}">{{item.name | titlecase}}</option>
+    <label for="category_id" class="form-label">Kategori</label>
+    <select
+      class="form-select"
+      required
+      [(ngModel)]="model.category_id"
+      name="category_id"
+      #category_id="ngModel"
+    >
+      <option value="">Seçiniz</option>
+      <option *ngFor="let item of categories" value="{{ item.id }}">
+        {{ item.name | titlecase }}
+      </option>
     </select>
+    <div class="alert alert-danger" *ngIf="category_id.invalid && category_id.touched">
+      <p *ngIf="category_id.errors.required">Bu alan gerekli.</p>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="createBook(name,url,detail,category_id)">Kaydet</button>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Kaydet</button>
+</form>

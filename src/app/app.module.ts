@@ -11,6 +11,7 @@ import { BasketComponent } from "./basket/basket.component";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { BookCreateComponent } from './books/book-create/book-create.component';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BookCreateComponent } from './books/book-create/book-create.component';
     //modules
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [], //services
   bootstrap: [AppComponent], //starter component

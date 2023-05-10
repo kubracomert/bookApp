@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgModel } from '@angular/forms';
 import { Category } from "src/app/models/category";
 import { BookService } from "src/services/book.service";
 import { CategoryService } from "src/services/category.service";
@@ -12,6 +13,9 @@ import { CategoryService } from "src/services/category.service";
 })
 export class BookCreateComponent implements OnInit {
   categories: Category[] = [];
+  model: any = {
+    category_id:""
+  };
 
   constructor(
     private categoryService: CategoryService,
@@ -24,17 +28,22 @@ export class BookCreateComponent implements OnInit {
       .getCategories()
       .subscribe((data) => (this.categories = data));
   }
-  createBook(name: any, url: any, detail: any, category_id: any) {
+
+  createBook() {
     const book = {
       id: 0,
-      name: name.value,
-      detail: detail.value,
-      url: url.value,
-      category_id: category_id.value,
+      name: this.model.name,
+      detail: this.model.detail,
+      url: this.model.url,
+      category_id: this.model.category_id,
     };
 
     this.bookService.createBook(book).subscribe((data) => {
-      this.router.navigate(["/books",data.id])
+      this.router.navigate(["/books", data.id]);
     });
+  }
+
+  handleChange(value:NgModel){
+    console.log(value)
   }
 }
