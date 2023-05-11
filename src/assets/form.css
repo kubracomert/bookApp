@@ -1,3 +1,7 @@
 .ng-touched.ng-invalid.form-control{
     border-bottom: 2px solid red;
 }
+
+.form-select.ng-touched.ng-invalid{
+    border-bottom: 2px solid red;
+}

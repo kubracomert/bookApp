@@ -1,5 +1,5 @@
 export interface Book{
-    id:number,
+    id:any,
     category_id:number,
     name:string,
     url:string,

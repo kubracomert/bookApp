@@ -1,75 +1,65 @@
 <h1>Kitap Ekle</h1>
-
-<form #form="ngForm" (ngSubmit)="createBook()">
+<form [formGroup]="formForBook" (ngSubmit)="createBook()">
   <div class="mb-3">
     <label for="name" class="form-label">İsim</label>
     <input
-      required
-      minlength="2"
-      maxlength="20"
       type="text"
-      [(ngModel)]="model.name"
       name="name"
       class="form-control"
-      #name="ngModel"
-      (change)="handleChange(name)"
+      formControlName="name"
     />
-    <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
-      <p *ngIf="name.errors.required">Bu alan gerekli.</p>
-      <p *ngIf="name.errors.minlength">En az 2 karakter giriniz.</p>
+     <div class="alert alert-danger" *ngIf="formForBook.get('name').invalid && formForBook.get('name').touched">
+      <p *ngIf="formForBook.get('name').errors.required">Bu alan gerekli.</p>
+      <p *ngIf="formForBook.get('name').errors.minlength">En az 2 karakter giriniz.</p>
     </div>
   </div>
   <div class="mb-3">
     <label for="url" class="form-label">Url</label>
     <input
-      required
-      minlength="5"
       type="text"
-      [(ngModel)]="model.url"
       name="url"
       class="form-control"
-      #url="ngModel"
+      formControlName="url"
     />
-    <div class="alert alert-danger" *ngIf="url.invalid && url.touched">
-      <p *ngIf="url.errors.required">Bu alan gerekli.</p>
-      <p *ngIf="url.errors.minlength">En az 5 karakter giriniz.</p>
+     <div class="alert alert-danger" *ngIf="formForBook.get('url').invalid && formForBook.get('url').touched">
+      <p *ngIf="formForBook.get('url').errors.required">Bu alan gerekli.</p>
+      <p *ngIf="formForBook.get('url').errors.minlength">En az 5 karakter giriniz.</p>
     </div>
   </div>
   <div class="mb-3">
     <label for="detail" class="form-label">Detay</label>
     <textarea
-      required
-      minlength="10"
-      maxlength="100"
       class="form-control"
       cols="30"
-      [(ngModel)]="model.detail"
       name="detail"
       rows="5"
-      #detail="ngModel"
+      formControlName="detail"
     ></textarea>
-    <div class="alert alert-danger" *ngIf="detail.invalid && detail.touched">
-      <p *ngIf="detail.errors.required">Bu alan gerekli.</p>
-      <p *ngIf="detail.errors.minlength">En az 10 karakter giriniz.</p>
+     <div class="alert alert-danger" *ngIf="formForBook.get('detail').invalid && formForBook.get('detail').touched">
+      <p *ngIf="formForBook.get('detail').errors.required">Bu alan gerekli.</p>
+      <p *ngIf="formForBook.get('detail').errors.minlength">En az 10 karakter giriniz.</p>
     </div>
   </div>
   <div class="mb-3">
     <label for="category_id" class="form-label">Kategori</label>
     <select
       class="form-select"
-      required
-      [(ngModel)]="model.category_id"
       name="category_id"
-      #category_id="ngModel"
+      formControlName="category_id"
     >
       <option value="">Seçiniz</option>
       <option *ngFor="let item of categories" value="{{ item.id }}">
         {{ item.name | titlecase }}
       </option>
     </select>
-    <div class="alert alert-danger" *ngIf="category_id.invalid && category_id.touched">
-      <p *ngIf="category_id.errors.required">Bu alan gerekli.</p>
+     <div class="alert alert-danger" *ngIf="formForBook.get('category_id').invalid && formForBook.get('category_id').touched">
+      <p *ngIf="formForBook.get('category_id').errors.required">Bu alan gerekli.</p>
     </div>
   </div>
-  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Kaydet</button>
+  <button type="submit" class="btn btn-primary">
+    Kaydet
+  </button>
+  <button class="btn btn-secondary" (click)="clearField()" type="button">
+    Alanları Temizle
+  </button>
 </form>

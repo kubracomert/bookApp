@@ -11,7 +11,7 @@ import { BasketComponent } from "./basket/basket.component";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { BookCreateComponent } from './books/book-create/book-create.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { FormsModule } from "@angular/forms";
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [], //services
   bootstrap: [AppComponent], //starter component

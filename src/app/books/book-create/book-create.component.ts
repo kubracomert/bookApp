@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { NgModel } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Category } from "src/app/models/category";
 import { BookService } from "src/services/book.service";
 import { CategoryService } from "src/services/category.service";
@@ -14,9 +14,8 @@ import { CategoryService } from "src/services/category.service";
 export class BookCreateComponent implements OnInit {
   categories: Category[] = [];
   model: any = {
-    category_id:""
+    category_id: "",
   };
-
   constructor(
     private categoryService: CategoryService,
     private bookService: BookService,
@@ -29,13 +28,29 @@ export class BookCreateComponent implements OnInit {
       .subscribe((data) => (this.categories = data));
   }
 
+  formForBook = new FormGroup({
+    name: new FormControl("",[Validators.required,Validators.minLength(2)]),
+    url: new FormControl("",[Validators.required,Validators.minLength(5)]),
+    detail: new FormControl("",[Validators.required,Validators.minLength(10),Validators.maxLength(100)]),
+    category_id: new FormControl("",Validators.required),
+  });
+
+  clearField() {
+    this.formForBook.patchValue({
+      name: "",
+      url: "",
+      detail: "",
+      category_id: ""
+    });
+  }
+
   createBook() {
     const book = {
       id: 0,
-      name: this.model.name,
-      detail: this.model.detail,
-      url: this.model.url,
-      category_id: this.model.category_id,
+      name: this.formForBook.value.name,
+      detail: this.formForBook.value.detail,
+      url: this.formForBook.value.url,
+      category_id: this.formForBook.value.category_id,
     };
 
     this.bookService.createBook(book).subscribe((data) => {
@@ -43,7 +58,4 @@ export class BookCreateComponent implements OnInit {
     });
   }
 
-  handleChange(value:NgModel){
-    console.log(value)
-  }
 }
