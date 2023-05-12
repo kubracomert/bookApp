@@ -11,8 +11,4 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  test(){
-    console.log("gene bana hasret")
-  }
 }

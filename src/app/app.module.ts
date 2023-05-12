@@ -12,6 +12,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { BookCreateComponent } from './books/book-create/book-create.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CategoryCreateComponent } from './category/category-create/category-create.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     CategoryComponent,
     BasketComponent,
     BookCreateComponent,
+    CategoryCreateComponent,
   ],
   imports: [
     //modules

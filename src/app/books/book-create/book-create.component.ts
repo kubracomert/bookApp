@@ -54,7 +54,7 @@ export class BookCreateComponent implements OnInit {
     };
 
     this.bookService.createBook(book).subscribe((data) => {
-      this.router.navigate(["/books", data.id]);
+      this.router.navigate(["/books", data.name]);
     });
   }
 

@@ -4,6 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { BooksComponent } from "./books/books.component";
 import { BookDetailComponent } from "./books/book-detail/book-detail.component";
 import { BookCreateComponent } from "./books/book-create/book-create.component";
+import { CategoryCreateComponent } from "./category/category-create/category-create.component";
 
 const routes: Routes = [
   { path: "books", component: BooksComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: "newBook", component: BookCreateComponent },
   { path: "books/category/:category_id", component: BooksComponent },
   { path: "books/:book_id", component: BookDetailComponent },
+  {path:"newCategory",component:CategoryCreateComponent}
 ];
 
 @NgModule({
