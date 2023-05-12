@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Input } from "@angular/core";
 import {
   HttpClient,
   HttpErrorResponse,
@@ -12,6 +12,7 @@ import { catchError, map, tap } from "rxjs/operators";
 export class BookService {
   url = "http://localhost:3000/books";
   firebase_url = "https://book-app-e77f0-default-rtdb.firebaseio.com/";
+  @Input() loader: boolean = true;
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +32,9 @@ export class BookService {
         }
         return temp;
       }),
-      tap((data) => console.log(data)),
+      tap((data) => {
+        this.loader = false;
+      }),
       catchError(this.handleError)
     );
   }
@@ -42,7 +45,9 @@ export class BookService {
       tempUrl += "/" + book_id + ".json";
     }
     return this.http.get<Book>(tempUrl).pipe(
-      tap((data) => console.log(data)),
+      tap((data) => {
+        this.loader = false;
+      }),
       catchError(this.handleError)
     );
   }
@@ -57,7 +62,9 @@ export class BookService {
         headers: headerOptions,
       })
       .pipe(
-        tap((data) => console.log({ data })),
+        tap((data) => {
+          this.loader = false;
+        }),
         catchError(this.handleError)
       );
   }

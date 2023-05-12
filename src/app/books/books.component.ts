@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output } from "@angular/core";
 import { Book } from "../models/book";
 import { BookService } from "src/services/book.service";
 import { ActivatedRoute } from "@angular/router";
@@ -12,7 +12,8 @@ import { ActivatedRoute } from "@angular/router";
 export class BooksComponent implements OnInit {
   pageTitle: string;
   books: Book[] = [];
-  error:any
+  error: any;
+  loader: boolean = true;
 
   constructor(
     private bookService: BookService,
@@ -26,12 +27,14 @@ export class BooksComponent implements OnInit {
       this.bookService.getBooks(params["category_id"]).subscribe(
         (data) => {
           this.books = data;
+          // this.loader=false
         },
         (error) => {
-          console.log({error})
-          this.error=error
+          console.log({ error });
+          this.error = error;
         }
       );
     });
   }
+
 }

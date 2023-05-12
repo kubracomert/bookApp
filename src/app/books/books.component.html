@@ -1,8 +1,8 @@
 <div class="alert alert-danger" *ngIf="error">
   {{ error }}
 </div>
-<div class="container">
-  <div *ngIf="books.length > 0; else noBook ">
+<div class="container" *ngIf="!loader">
+  <div *ngIf="books.length > 0; else noBook">
     <h1>{{ pageTitle }}</h1>
     <ng-template
       [ngTemplateOutlet]="bookList"
@@ -15,7 +15,9 @@
 </div>
 
 <ng-template #noBook>
-  <div *ngIf="!error" class="alert alert-warning">Aranılan özellikte kitap bulunmadı!</div>
+  <div *ngIf="!error" class="alert alert-warning">
+    Aranılan özellikte kitap bulunmadı!
+  </div>
 </ng-template>
 
 <ng-template #bookList let-booksParams="listBooks">
@@ -38,3 +40,6 @@
     </div>
   </div>
 </ng-template>
+<div *ngIf="loader">
+  <app-loader ></app-loader>
+</div>

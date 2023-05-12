@@ -12,6 +12,7 @@ export class CategoryComponent implements OnInit {
   categories: Category[]=[];
   selectedCategory: Category;
   displayAll: boolean;
+  loader:boolean=true
 
   constructor(private categoryService: CategoryService) {
     this.selectedCategory = null;
@@ -20,6 +21,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe((data)=>{
+      // this.loader=false
       this.categories=data
     })
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Category } from "src/app/models/category";
@@ -16,6 +16,8 @@ export class BookCreateComponent implements OnInit {
   model: any = {
     category_id: "",
   };
+  loader:boolean=true
+  
   constructor(
     private categoryService: CategoryService,
     private bookService: BookService,
@@ -54,6 +56,7 @@ export class BookCreateComponent implements OnInit {
     };
 
     this.bookService.createBook(book).subscribe((data) => {
+      this.loader=false
       this.router.navigate(["/books", data.name]);
     });
   }

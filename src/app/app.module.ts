@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BookCreateComponent } from './books/book-create/book-create.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CategoryCreateComponent } from './category/category-create/category-cre
     BasketComponent,
     BookCreateComponent,
     CategoryCreateComponent,
+    LoaderComponent,
   ],
   imports: [
     //modules

@@ -10,6 +10,7 @@ import { CategoryService } from "src/services/category.service";
   providers: [CategoryService],
 })
 export class CategoryCreateComponent implements OnInit {
+  loader:boolean=true
   constructor(private router: Router, private categoryService: CategoryService) {}
 
   ngOnInit() {}
@@ -19,6 +20,7 @@ export class CategoryCreateComponent implements OnInit {
       name: name,
     };
     this.categoryService.createCategory(category).subscribe((data) => {
+      this.loader=false
       this.router.navigate(["/"]);
     });
   }

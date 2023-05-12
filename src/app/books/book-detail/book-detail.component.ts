@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Book } from "src/app/models/book";
 import { BookService } from "src/services/book.service";
@@ -11,6 +11,7 @@ import { BookService } from "src/services/book.service";
 })
 export class BookDetailComponent implements OnInit {
   book: Book;
+  loader:boolean=true
 
   constructor(
     private bookService: BookService,
@@ -20,6 +21,7 @@ export class BookDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.bookService.getBookById(params["book_id"]).subscribe((data) => {
+        this.loader=false
         this.book = data;
       });
     });
