@@ -14,6 +14,7 @@ import { BookCreateComponent } from './books/book-create/book-create.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CategoryCreateComponent } from './category/category-create/category-create.component';
 import { LoaderComponent } from './loader/loader.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LoaderComponent } from './loader/loader.component';
     BookCreateComponent,
     CategoryCreateComponent,
     LoaderComponent,
+    AuthComponent,
   ],
   imports: [
     //modules
