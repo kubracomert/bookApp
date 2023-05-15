@@ -10,12 +10,13 @@ import { CategoryService } from "src/services/category.service";
   providers: [CategoryService],
 })
 export class CategoryCreateComponent implements OnInit {
-  loader:boolean=true
+  loader:boolean
   constructor(private router: Router, private categoryService: CategoryService) {}
 
   ngOnInit() {}
 
   createCategory(name: string) {
+    this.loader=true
     const category: Category = {
       name: name,
     };

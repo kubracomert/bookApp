@@ -1,14 +1,19 @@
 <div class="list-group">
-    <a class="list-group-item list-group-item-action" [class.active]="displayAll" (click)="getBooksToCategory()"  routerLink="books"  
-      >Tüm Kategoriler</a
-    >
-    <a *ngFor="let item of categories"
-      class="list-group-item list-group-item-action"
-      [class.active]="!displayAll && selectedCategory.id === item.id"
-      (click)="getBooksToCategory(item)"
-      routerLink="books/category/{{item.id}}" routerLinkActive="router-link-active" 
-      >{{ item.name | titlecase }}</a
-    >
-  </div>
+  <a
+    class="list-group-item list-group-item-action"
+    [class.active]="displayAll"
+    (click)="getBooksToCategory()"
+    routerLink="books"
+    >Tüm Kategoriler</a
+  >
+  <a
+    *ngFor="let item of categories"
+    class="list-group-item list-group-item-action"
+    [class.active]="!displayAll && selectedCategory.id === item.id"
+    (click)="getBooksToCategory(item)"
+    routerLink="books/category/{{ item.id }}"
+    routerLinkActive="router-link-active"
+    >{{ item.name | titlecase }}</a
+  >
+</div>
 <app-loader *ngIf="loader"></app-loader>
-  

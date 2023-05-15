@@ -27,7 +27,7 @@ export class BooksComponent implements OnInit {
       this.bookService.getBooks(params["category_id"]).subscribe(
         (data) => {
           this.books = data;
-          // this.loader=false
+          this.loader=false
         },
         (error) => {
           console.log({ error });

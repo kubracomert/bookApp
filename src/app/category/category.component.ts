@@ -21,7 +21,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe((data)=>{
-      // this.loader=false
+      this.loader=false
       this.categories=data
     })
   }

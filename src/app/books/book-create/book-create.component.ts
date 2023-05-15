@@ -16,7 +16,7 @@ export class BookCreateComponent implements OnInit {
   model: any = {
     category_id: "",
   };
-  loader:boolean=true
+  loader:boolean
   
   constructor(
     private categoryService: CategoryService,
@@ -47,6 +47,7 @@ export class BookCreateComponent implements OnInit {
   }
 
   createBook() {
+    this.loader=true
     const book = {
       id: 0,
       name: this.formForBook.value.name,
