@@ -1,21 +1,21 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../../services/auth.service";
 import { Observable } from "rxjs";
 import { AuthResponse } from "../models/authresponse";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-auth",
   templateUrl: "./auth.component.html",
   styleUrls: ["./auth.component.css"],
-  providers: [AuthService],
 })
 export class AuthComponent implements OnInit {
   isRegister: boolean = false;
   loader: boolean = false;
   error: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router:Router) {}
 
   ngOnInit() {}
 
@@ -40,6 +40,7 @@ export class AuthComponent implements OnInit {
     authresponse.subscribe(
       (response) => {
         this.loader = false;
+        this.router.navigate(["/books"])
         console.log(response);
       },
       (error) => {

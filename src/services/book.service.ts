@@ -12,7 +12,7 @@ import { catchError, map, tap } from "rxjs/operators";
 export class BookService {
   url = "http://localhost:3000/books";
   firebase_url = "https://book-app-e77f0-default-rtdb.firebaseio.com/";
-  @Input() loader: boolean = true;
+  loader: boolean = true;
 
   constructor(private http: HttpClient) {}
 

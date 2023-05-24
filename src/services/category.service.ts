@@ -44,6 +44,6 @@ export class CategoryService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    return throwError("Bir hata ile karşılaşıldı.");
+    return throwError("2Bir hata ile karşılaşıldı.");
   }
 }

@@ -8,13 +8,15 @@ import { BookComponent } from "./books/book/book.component";
 import { BookDetailComponent } from "./books/book-detail/book-detail.component";
 import { CategoryComponent } from "./category/category.component";
 import { BasketComponent } from "./basket/basket.component";
-import { HttpClientModule } from "@angular/common/http";
-import { AppRoutingModule } from './app-routing.module';
-import { BookCreateComponent } from './books/book-create/book-create.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { AppRoutingModule } from "./app-routing.module";
+import { BookCreateComponent } from "./books/book-create/book-create.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { CategoryCreateComponent } from './category/category-create/category-create.component';
-import { LoaderComponent } from './loader/loader.component';
-import { AuthComponent } from './auth/auth.component';
+import { CategoryCreateComponent } from "./category/category-create/category-create.component";
+import { LoaderComponent } from "./loader/loader.component";
+import { AuthComponent } from "./auth/auth.component";
+import { ErrorInterceptor } from "src/services/error.interceptor";
+import { AuthInterceptor } from "src/services/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -37,9 +39,12 @@ import { AuthComponent } from './auth/auth.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [], //services
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ], //services
   bootstrap: [AppComponent], //starter component
 })
 export class AppModule {}
