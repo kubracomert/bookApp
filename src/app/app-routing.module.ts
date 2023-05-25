@@ -7,14 +7,37 @@ import { BookCreateComponent } from "./books/book-create/book-create.component";
 import { CategoryCreateComponent } from "./category/category-create/category-create.component";
 import { AuthComponent } from "./auth/auth.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { BooksHomeComponent } from "./books/books-home/books-home.component";
 
 const routes: Routes = [
-  { path: "books", component: BooksComponent, canActivate: [AuthGuard] },
   { path: "", redirectTo: "books", pathMatch: "full" },
-  { path: "newBook", component: BookCreateComponent, canActivate: [AuthGuard] },
-  { path: "books/category/:category_id", component: BooksComponent, canActivate: [AuthGuard] },
-  { path: "books/:book_id", component: BookDetailComponent, canActivate: [AuthGuard] },
-  { path: "newCategory", component: CategoryCreateComponent, canActivate: [AuthGuard] },
+  {
+    path: "books",
+    component: BooksHomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", component: BooksComponent },
+      {
+        path: "newBook",
+        component: BookCreateComponent,
+      },
+      {
+        path: "category/:category_id",
+        component: BooksComponent,
+      },
+      {
+        path: ":book_id",
+        component: BookDetailComponent,
+      },
+    ],
+  },
+
+  {
+    path: "newCategory",
+    component: CategoryCreateComponent,
+    canActivate: [AuthGuard],
+  },
+
   { path: "auth", component: AuthComponent },
 ];
 

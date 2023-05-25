@@ -17,6 +17,7 @@ import { LoaderComponent } from "./loader/loader.component";
 import { AuthComponent } from "./auth/auth.component";
 import { ErrorInterceptor } from "src/services/error.interceptor";
 import { AuthInterceptor } from "src/services/auth.interceptor";
+import { BooksHomeComponent } from './books/books-home/books-home.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthInterceptor } from "src/services/auth.interceptor";
     CategoryCreateComponent,
     LoaderComponent,
     AuthComponent,
+    BooksHomeComponent,
   ],
   imports: [
     //modules
