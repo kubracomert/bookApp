@@ -4,6 +4,7 @@ import { AuthResponse } from "../app/models/authresponse";
 import { tap } from "rxjs/operators";
 import { User } from "src/app/models/user";
 import { BehaviorSubject } from "rxjs";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +17,7 @@ export class AuthService {
     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCC_9WnMYVd07FbNo6nCt2BcsyIzOOnqvE";
 
   user = new BehaviorSubject<User>(null);
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   signUp(email: string, password: string) {
     return this.http
@@ -27,17 +28,12 @@ export class AuthService {
       })
       .pipe(
         tap((res) => {
-          const expirationDate = new Date(
-            new Date().getTime() + +res.expiresIn * 1000
-          );
-
-          const user = new User(
+          this.handleAuthentication(
             res.email,
             res.localId,
             res.idToken,
-            expirationDate
+            +res.expiresIn
           );
-          this.user.next(user);
         })
       );
   }
@@ -51,17 +47,50 @@ export class AuthService {
       })
       .pipe(
         tap((res) => {
-          const expirationDate = new Date(
-            new Date().getTime() + +res.expiresIn * 1000
-          );
-          const usertemp = new User(
+          this.handleAuthentication(
             res.email,
             res.localId,
             res.idToken,
-            expirationDate
+            +res.expiresIn
           );
-          this.user.next(usertemp);
         })
       );
+  }
+
+  logOut() {
+    this.user.next(null);
+    localStorage.removeItem("user");
+    this.router.navigate(["/auth"]);
+  }
+
+  autoLogin() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      return;
+    }
+    const authUser=new User(
+      user.email,
+      user.id,
+      user._token,
+      new Date(user._tokenExpirationDate)
+    )
+
+    if (authUser.token) {
+      this.user.next(authUser)
+    }
+  }
+
+  handleAuthentication(
+    email: string,
+    userId: string,
+    idToken: string,
+    expiresIn: number
+  ) {
+    const expirationDate = new Date(new Date().getTime() + +expiresIn * 1000);
+
+    const user = new User(email, userId, idToken, expirationDate);
+    this.user.next(user);
+
+    localStorage.setItem("user", JSON.stringify(user));
   }
 }

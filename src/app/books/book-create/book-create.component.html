@@ -1,66 +1,111 @@
-<h1>Kitap Ekle</h1>
-<form [formGroup]="formForBook" (ngSubmit)="createBook()">
-  <div class="mb-3">
-    <label for="name" class="form-label">İsim</label>
-    <input
-      type="text"
-      name="name"
-      class="form-control"
-      formControlName="name"
-    />
-     <div class="alert alert-danger" *ngIf="formForBook.get('name').invalid && formForBook.get('name').touched">
-      <p *ngIf="formForBook.get('name').errors.required">Bu alan gerekli.</p>
-      <p *ngIf="formForBook.get('name').errors.minlength">En az 2 karakter giriniz.</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <h1>Kitap Ekle</h1>
+      <form [formGroup]="formForBook" (ngSubmit)="createBook()">
+        <div class="mb-3">
+          <label for="name" class="form-label">İsim</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            formControlName="name"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formForBook.get('name').invalid && formForBook.get('name').touched
+            "
+          >
+            <p *ngIf="formForBook.get('name').errors.required">
+              Bu alan gerekli.
+            </p>
+            <p *ngIf="formForBook.get('name').errors.minlength">
+              En az 2 karakter giriniz.
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="url" class="form-label">Url</label>
+          <input
+            type="text"
+            name="url"
+            class="form-control"
+            formControlName="url"
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formForBook.get('url').invalid && formForBook.get('url').touched
+            "
+          >
+            <p *ngIf="formForBook.get('url').errors.required">
+              Bu alan gerekli.
+            </p>
+            <p *ngIf="formForBook.get('url').errors.minlength">
+              En az 5 karakter giriniz.
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="detail" class="form-label">Detay</label>
+          <textarea
+            class="form-control"
+            cols="30"
+            name="detail"
+            rows="5"
+            formControlName="detail"
+          ></textarea>
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formForBook.get('detail').invalid &&
+              formForBook.get('detail').touched
+            "
+          >
+            <p *ngIf="formForBook.get('detail').errors.required">
+              Bu alan gerekli.
+            </p>
+            <p *ngIf="formForBook.get('detail').errors.minlength">
+              En az 10 karakter giriniz.
+            </p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="category_id" class="form-label">Kategori</label>
+          <select
+            class="form-select"
+            name="category_id"
+            formControlName="category_id"
+          >
+            <option value="">Seçiniz</option>
+            <option *ngFor="let item of categories" value="{{ item.id }}">
+              {{ item.name | titlecase }}
+            </option>
+          </select>
+          <div
+            class="alert alert-danger"
+            *ngIf="
+              formForBook.get('category_id').invalid &&
+              formForBook.get('category_id').touched
+            "
+          >
+            <p *ngIf="formForBook.get('category_id').errors.required">
+              Bu alan gerekli.
+            </p>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <button
+          class="btn btn-secondary mx-3"
+          (click)="clearField()"
+          type="button"
+        >
+          Alanları Temizle
+        </button>
+      </form>
     </div>
   </div>
-  <div class="mb-3">
-    <label for="url" class="form-label">Url</label>
-    <input
-      type="text"
-      name="url"
-      class="form-control"
-      formControlName="url"
-    />
-     <div class="alert alert-danger" *ngIf="formForBook.get('url').invalid && formForBook.get('url').touched">
-      <p *ngIf="formForBook.get('url').errors.required">Bu alan gerekli.</p>
-      <p *ngIf="formForBook.get('url').errors.minlength">En az 5 karakter giriniz.</p>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="detail" class="form-label">Detay</label>
-    <textarea
-      class="form-control"
-      cols="30"
-      name="detail"
-      rows="5"
-      formControlName="detail"
-    ></textarea>
-     <div class="alert alert-danger" *ngIf="formForBook.get('detail').invalid && formForBook.get('detail').touched">
-      <p *ngIf="formForBook.get('detail').errors.required">Bu alan gerekli.</p>
-      <p *ngIf="formForBook.get('detail').errors.minlength">En az 10 karakter giriniz.</p>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="category_id" class="form-label">Kategori</label>
-    <select
-      class="form-select"
-      name="category_id"
-      formControlName="category_id"
-    >
-      <option value="">Seçiniz</option>
-      <option *ngFor="let item of categories" value="{{ item.id }}">
-        {{ item.name | titlecase }}
-      </option>
-    </select>
-     <div class="alert alert-danger" *ngIf="formForBook.get('category_id').invalid && formForBook.get('category_id').touched">
-      <p *ngIf="formForBook.get('category_id').errors.required">Bu alan gerekli.</p>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">
-    Kaydet
-  </button>
-  <button class="btn btn-secondary mx-3" (click)="clearField()" type="button">
-    Alanları Temizle
-  </button>
-</form>
+</div>
+
 <app-loader *ngIf="loader"></app-loader>

@@ -17,7 +17,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((response: HttpErrorResponse) => {
-        console.log(response)
         let errorMsg;
 
         if (!navigator.onLine) {
@@ -35,7 +34,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               errorMsg = "Kullanıcı bulunamadı.";
               break;
             default:
-              errorMsg = "1Bir hata ile karşılaşıldı";
+              errorMsg = "Bir hata ile karşılaşıldı";
               break;
           }
         }

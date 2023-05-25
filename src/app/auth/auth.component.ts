@@ -41,7 +41,6 @@ export class AuthComponent implements OnInit {
       (response) => {
         this.loader = false;
         this.router.navigate(["/books"])
-        console.log(response);
       },
       (error) => {
         this.error = error;

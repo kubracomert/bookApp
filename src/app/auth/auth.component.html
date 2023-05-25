@@ -1,20 +1,53 @@
-<div class="alert alert-danger" *ngIf="error">
-  {{ error }}
-</div>
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+<div class="container">
   <div class="row">
-    <div class="col-8">
-      <div class="mb-3">
-        <label for="email" class="form-label">E-posta</label>
-        <input type="email" required email id="email" name="email" ngModel class="form-control" />
+    <div class="col-5 mx-auto mt-5">
+      <div class="alert alert-danger" *ngIf="error">
+        {{ error }}
       </div>
-    </div>
-    <div class="col-8">
-        <label for="password" class="form-label">Parola</label>
-        <input type="password" required minlength="5" id="pass" class="form-control" ngModel name="password">
+      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+        <div class="row">
+          <div class="col-8">
+            <div class="mb-3">
+              <label for="email" class="form-label">E-posta</label>
+              <input
+                type="email"
+                required
+                email
+                id="email"
+                name="email"
+                ngModel
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="col-8">
+            <label for="password" class="form-label">Parola</label>
+            <input
+              type="password"
+              required
+              minlength="5"
+              id="pass"
+              class="form-control"
+              ngModel
+              name="password"
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-primary mt-3"
+          [disabled]="authForm.invalid"
+          type="submit"
+        >
+          {{ isRegister ? "Kayıt Ol" : "Giriş Yap" }}
+        </button>
+        <button
+          class="btn btn-secondary mt-3 ms-2"
+          type="button"
+          (click)="toogle()"
+        >
+          {{ isRegister ? "Giriş Yap" : "Kayıt Ol" }}
+        </button>
+      </form>
     </div>
   </div>
-  <button class="btn btn-primary mt-3" [disabled]="authForm.invalid" type="submit">{{isRegister ? "Kayıt Ol": "Giriş Yap"}}</button>
-  <button class="btn btn-secondary mt-3 ms-2" type="button" (click)="toogle()">{{isRegister? "Giriş Yap" : "Kayıt Ol"}}</button>
-</form>
-<!-- <app-loader *ngIf="loader"></app-loader> -->
+</div>

@@ -6,7 +6,6 @@ export class User {
         private _tokenExpirationDate: Date) { }
 
     get token() {
-        console.log("burayla  herhangi bir bağlantı var mı")
         if(!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
             return null;
         }
