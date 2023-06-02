@@ -7,6 +7,7 @@ import {
 import { Book } from "src/app/models/book";
 import { Observable, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
+import { MyBasket } from "src/app/models/myBasket";
 
 @Injectable()
 export class BookService {
@@ -65,6 +66,24 @@ export class BookService {
         tap((data) => {
           this.loader = false;
         }),
+        catchError(this.handleError)
+      );
+  }
+
+  addBookInBasket(basket: MyBasket): Observable<MyBasket> {
+    let tempUrl =
+      this.firebase_url +
+      "/users/" +
+      basket.user_id +
+      "/basket/" +
+      basket.book_id +
+      ".json";
+    return this.http
+      .post<MyBasket>(tempUrl, {
+        date: new Date().getTime(),
+      })
+      .pipe(
+        tap((res) => console.log(res)),
         catchError(this.handleError)
       );
   }
