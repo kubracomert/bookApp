@@ -1,1 +1,8 @@
-<p>basket works!</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Sepetim</h4>
+        <div *ngFor="let book of bookInBasket | keyvalue">
+            <p class="card-text">  {{book.key}}:{{book.value}}</p>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,11 @@
-import { Injectable, Input } from "@angular/core";
+import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
 } from "@angular/common/http";
 import { Book } from "src/app/models/book";
-import { Observable, throwError } from "rxjs";
+import { Observable, Subject, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 import { MyBasket } from "src/app/models/myBasket";
 
@@ -70,20 +70,30 @@ export class BookService {
       );
   }
 
-  addBookInBasket(basket: MyBasket): Observable<MyBasket> {
-    let tempUrl =
-      this.firebase_url +
-      "/users/" +
-      basket.user_id +
-      "/basket/" +
-      basket.book_id +
-      ".json";
+  addBookToBasket(basket: MyBasket): Observable<MyBasket> {
+    let tempUrl = this.firebase_url + "baskets/" + basket.user_id;
+
+    console.log(basket.tut.asObservable());
+    // basket.count.subscribe((data) => {
+    //   console.log(data, "hançer");
+    //   tut = data;
+    // });
+    // console.log(tut, "snaa kızmıyouöm");
+
+    // if (basket.count > 1) {
+    //   return this.http.put<MyBasket>(tempUrl + ".json", {
+    //     book_id: basket.book_id,
+    //     count: basket.count,
+    //   });
+    // }
+
     return this.http
-      .post<MyBasket>(tempUrl, {
-        date: new Date().getTime(),
+      .post<MyBasket>(tempUrl + ".json", {
+        book_id: basket.book_id,
+        count: 1,
       })
       .pipe(
-        tap((res) => console.log(res)),
+        // tap((res) => console.log(res)),
         catchError(this.handleError)
       );
   }

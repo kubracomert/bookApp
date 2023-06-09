@@ -2,5 +2,3 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "assets/form.css";
 @import "assets/spinner.css";
-@import "~alertifyjs/build/css/alertify.min.css";
-@import "~alertifyjs/build/css/themes/bootstrap.min.css";

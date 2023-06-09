@@ -18,7 +18,6 @@ import { AuthComponent } from "./auth/auth.component";
 import { ErrorInterceptor } from "src/services/error.interceptor";
 import { AuthInterceptor } from "src/services/auth.interceptor";
 import { BooksHomeComponent } from './books/books-home/books-home.component';
-import { AlertifyService } from "src/services/alertify.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { AlertifyService } from "src/services/alertify.service";
     ReactiveFormsModule,
   ],
   providers: [
-    AlertifyService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ], //services

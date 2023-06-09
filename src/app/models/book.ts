@@ -3,5 +3,7 @@ export interface Book{
     category_id:number,
     name:string,
     url:string,
-    detail:string
+    detail:string,
+    book_id?:string,
+    count?:number
 }
